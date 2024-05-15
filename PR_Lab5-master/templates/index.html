@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Email Client{% endblock %}</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="/auth">Authentication</a></li>
+            <li><a href="/compose">New Email</a></li>
+            <li><a href="/list_emails">List Emails</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        <h2>Welcome to this email client!</h2>
+        <p>Click on the links in the sidebar to navigate.</p>
+        {% endblock %}
+    </div>
+</body>
+
+</html>

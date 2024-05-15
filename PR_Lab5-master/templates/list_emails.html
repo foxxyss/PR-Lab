@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+
+{% block title %}
+List Emails
+{% endblock %}
+
+{% block content %}
+<h2>Recent Emails</h2>
+{% if emails %}
+<ul>
+    {% for email in emails %}
+    <li>
+        <strong>From:</strong> {{ email['From'] }}<br>
+        <strong>Subject:</strong> {{ email['Subject'] }}<br>
+        <strong>Date:</strong> {{ email['Date'] }}<br>
+        <strong>Body:</strong> {{ email['Body'] }}<br>
+        {% if email['Attachment'] %}
+        <strong>Attachment:</strong> <a href="{{ url_for('download_attachment', filename=email['Attachment']) }}">{{ email['Attachment'] }}</a><br>
+        {% endif %}
+        <form action="{{ url_for('reply_to_email') }}" method="post">
+            <input type="hidden" name="thread_id" value="{{ email['Thread-ID'] }}">
+            <input type="hidden" name="Message-ID" value="{{ email['Message-ID'] }}">
+            <input type="hidden" name="recipient" value="{{ email['From'] }}">
+            <input type="hidden" name="subject" value="Re: {{ email['Subject'] }}">
+            <input type="text" name="body" value="Re: {{ email['Body'] }}">
+            <input type="hidden" name="sender_email" value="{{ sender_email }}">
+            <input type="hidden" name="sender_password" value="{{ sender_password }}">
+            <input type="submit" value="Reply">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No recent emails.</p>
+{% endif %}
+<hr>
+{% endblock %}

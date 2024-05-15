@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block title %}
+Authentication
+{% endblock %}
+
+{% block content %}
+<h2>Authentication</h2>
+<form action="/auth" method="POST">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">Authentication</button>
+</form>
+<hr>
+{% endblock %}
